@@ -35,10 +35,66 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "score": {
-                    "name": "score",
+                "hole1": {
+                    "name": "hole1",
                     "isArray": false,
-                    "type": "AWSJSON",
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole2": {
+                    "name": "hole2",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole3": {
+                    "name": "hole3",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole4": {
+                    "name": "hole4",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole5": {
+                    "name": "hole5",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole6": {
+                    "name": "hole6",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole7": {
+                    "name": "hole7",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole8": {
+                    "name": "hole8",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hole9": {
+                    "name": "hole9",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -164,6 +220,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "password": {
+                    "name": "password",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -210,5 +273,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "02bb3849ca555deab89d70033700445f"
+    "version": "9d4eb68aa967632e2a8f1b585dc71958"
 };

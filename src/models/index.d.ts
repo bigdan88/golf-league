@@ -14,7 +14,15 @@ type EagerGolfRound = {
   readonly id: string;
   readonly players_game?: Players | null;
   readonly date?: string | null;
-  readonly score?: string | null;
+  readonly hole1?: number | null;
+  readonly hole2?: number | null;
+  readonly hole3?: number | null;
+  readonly hole4?: number | null;
+  readonly hole5?: number | null;
+  readonly hole6?: number | null;
+  readonly hole7?: number | null;
+  readonly hole8?: number | null;
+  readonly hole9?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly golfRoundPlayers_gameId?: string | null;
@@ -28,7 +36,15 @@ type LazyGolfRound = {
   readonly id: string;
   readonly players_game: AsyncItem<Players | undefined>;
   readonly date?: string | null;
-  readonly score?: string | null;
+  readonly hole1?: number | null;
+  readonly hole2?: number | null;
+  readonly hole3?: number | null;
+  readonly hole4?: number | null;
+  readonly hole5?: number | null;
+  readonly hole6?: number | null;
+  readonly hole7?: number | null;
+  readonly hole8?: number | null;
+  readonly hole9?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly golfRoundPlayers_gameId?: string | null;
@@ -55,6 +71,7 @@ type EagerPlayers = {
   readonly subs_mondays?: boolean | null;
   readonly plays_wednesdays?: boolean | null;
   readonly subs_wednesdays?: boolean | null;
+  readonly password: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -74,6 +91,7 @@ type LazyPlayers = {
   readonly subs_mondays?: boolean | null;
   readonly plays_wednesdays?: boolean | null;
   readonly subs_wednesdays?: boolean | null;
+  readonly password: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

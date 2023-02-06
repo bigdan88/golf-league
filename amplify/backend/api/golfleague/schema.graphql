@@ -2,7 +2,15 @@ type GolfRound @model @auth(rules: [{allow: public}]) {
   id: ID!
   players_game: Players @hasOne
   date: AWSDateTime
-  score: AWSJSON
+  hole1: Int
+  hole2: Int
+  hole3: Int
+  hole4: Int
+  hole5: Int
+  hole6: Int
+  hole7: Int
+  hole8: Int
+  hole9: Int
 }
 
 type Players @model @auth(rules: [{allow: public}]) {
@@ -16,5 +24,6 @@ type Players @model @auth(rules: [{allow: public}]) {
   subs_mondays: Boolean
   plays_wednesdays: Boolean
   subs_wednesdays: Boolean
+  password: String!
 }
  

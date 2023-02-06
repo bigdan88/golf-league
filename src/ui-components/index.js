@@ -5,7 +5,8 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
+export { default as PlayersCreateForm } from "./PlayersCreateForm";
+export { default as CreateGolfHoles } from "./CreateGolfHoles";
 export { default as GolfRoundCreateForm } from "./GolfRoundCreateForm";
 export { default as GolfRoundUpdateForm } from "./GolfRoundUpdateForm";
-export { default as PlayersCreateForm } from "./PlayersCreateForm";
 export { default as PlayersUpdateForm } from "./PlayersUpdateForm";

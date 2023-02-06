@@ -10,6 +10,7 @@ import {
   Button,
   Flex,
   Grid,
+  PasswordField,
   SwitchField,
   TextField,
 } from "@aws-amplify/ui-react";
@@ -17,7 +18,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Players } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function PlayersCreateForm(props) {
+export default function RegisterPlater(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -31,8 +32,8 @@ export default function PlayersCreateForm(props) {
   const initialValues = {
     first_name: "",
     last_name: "",
+    password: undefined,
     email: "",
-    password: "",
     phone: "",
     handicap: "",
     plays_mondays: false,
@@ -42,8 +43,8 @@ export default function PlayersCreateForm(props) {
   };
   const [first_name, setFirst_name] = React.useState(initialValues.first_name);
   const [last_name, setLast_name] = React.useState(initialValues.last_name);
-  const [email, setEmail] = React.useState(initialValues.email);
   const [password, setPassword] = React.useState(initialValues.password);
+  const [email, setEmail] = React.useState(initialValues.email);
   const [phone, setPhone] = React.useState(initialValues.phone);
   const [handicap, setHandicap] = React.useState(initialValues.handicap);
   const [plays_mondays, setPlays_mondays] = React.useState(
@@ -62,8 +63,8 @@ export default function PlayersCreateForm(props) {
   const resetStateValues = () => {
     setFirst_name(initialValues.first_name);
     setLast_name(initialValues.last_name);
-    setEmail(initialValues.email);
     setPassword(initialValues.password);
+    setEmail(initialValues.email);
     setPhone(initialValues.phone);
     setHandicap(initialValues.handicap);
     setPlays_mondays(initialValues.plays_mondays);
@@ -75,8 +76,8 @@ export default function PlayersCreateForm(props) {
   const validations = {
     first_name: [{ type: "Required" }],
     last_name: [{ type: "Required" }],
-    email: [{ type: "Required" }, { type: "Email" }],
     password: [{ type: "Required" }],
+    email: [{ type: "Required" }, { type: "Email" }],
     phone: [{ type: "Phone" }],
     handicap: [],
     plays_mondays: [],
@@ -111,8 +112,8 @@ export default function PlayersCreateForm(props) {
         let modelFields = {
           first_name,
           last_name,
-          email,
           password,
+          email,
           phone,
           handicap,
           plays_mondays,
@@ -161,7 +162,7 @@ export default function PlayersCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PlayersCreateForm")}
+      {...getOverrideProps(overrides, "RegisterPlater")}
       {...rest}
     >
       <TextField
@@ -175,8 +176,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name: value,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays,
@@ -208,8 +209,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name: value,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays,
@@ -230,6 +231,38 @@ export default function PlayersCreateForm(props) {
         hasError={errors.last_name?.hasError}
         {...getOverrideProps(overrides, "last_name")}
       ></TextField>
+      <PasswordField
+        label="Password"
+        isRequired={true}
+        isReadOnly={false}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              first_name,
+              last_name,
+              password: value,
+              email,
+              phone,
+              handicap,
+              plays_mondays,
+              subs_mondays,
+              plays_wednesdays,
+              subs_wednesdays,
+            };
+            const result = onChange(modelFields);
+            value = result?.password ?? value;
+          }
+          if (errors.password?.hasError) {
+            runValidationTasks("password", value);
+          }
+          setPassword(value);
+        }}
+        onBlur={() => runValidationTasks("password", password)}
+        errorMessage={errors.password?.errorMessage}
+        hasError={errors.password?.hasError}
+        {...getOverrideProps(overrides, "password")}
+      ></PasswordField>
       <TextField
         label="Email"
         isRequired={true}
@@ -241,8 +274,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email: value,
               password,
+              email: value,
               phone,
               handicap,
               plays_mondays,
@@ -264,42 +297,7 @@ export default function PlayersCreateForm(props) {
         {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
-        label="Password"
-        descriptiveText=""
-        isRequired={true}
-        isReadOnly={false}
-        value={password}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              first_name,
-              last_name,
-              email,
-              password: value,
-              phone,
-              handicap,
-              plays_mondays,
-              subs_mondays,
-              plays_wednesdays,
-              subs_wednesdays,
-            };
-            const result = onChange(modelFields);
-            value = result?.password ?? value;
-          }
-          if (errors.password?.hasError) {
-            runValidationTasks("password", value);
-          }
-          setPassword(value);
-        }}
-        onBlur={() => runValidationTasks("password", password)}
-        errorMessage={errors.password?.errorMessage}
-        hasError={errors.password?.hasError}
-        {...getOverrideProps(overrides, "password")}
-      ></TextField>
-      <TextField
         label="Phone"
-        descriptiveText="Optional, but it will enable text updates"
         isRequired={false}
         isReadOnly={false}
         type="tel"
@@ -310,8 +308,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone: value,
               handicap,
               plays_mondays,
@@ -347,8 +345,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap: value,
               plays_mondays,
@@ -380,8 +378,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays: value,
@@ -413,8 +411,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays,
@@ -446,8 +444,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays,
@@ -479,8 +477,8 @@ export default function PlayersCreateForm(props) {
             const modelFields = {
               first_name,
               last_name,
-              email,
               password,
+              email,
               phone,
               handicap,
               plays_mondays,

@@ -39,6 +39,7 @@ export default function PlayersUpdateForm(props) {
     subs_mondays: false,
     plays_wednesdays: false,
     subs_wednesdays: false,
+    password: "",
   };
   const [first_name, setFirst_name] = React.useState(initialValues.first_name);
   const [last_name, setLast_name] = React.useState(initialValues.last_name);
@@ -57,6 +58,7 @@ export default function PlayersUpdateForm(props) {
   const [subs_wednesdays, setSubs_wednesdays] = React.useState(
     initialValues.subs_wednesdays
   );
+  const [password, setPassword] = React.useState(initialValues.password);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = playersRecord
@@ -71,6 +73,7 @@ export default function PlayersUpdateForm(props) {
     setSubs_mondays(cleanValues.subs_mondays);
     setPlays_wednesdays(cleanValues.plays_wednesdays);
     setSubs_wednesdays(cleanValues.subs_wednesdays);
+    setPassword(cleanValues.password);
     setErrors({});
   };
   const [playersRecord, setPlayersRecord] = React.useState(players);
@@ -92,6 +95,7 @@ export default function PlayersUpdateForm(props) {
     subs_mondays: [],
     plays_wednesdays: [],
     subs_wednesdays: [],
+    password: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -127,6 +131,7 @@ export default function PlayersUpdateForm(props) {
           subs_mondays,
           plays_wednesdays,
           subs_wednesdays,
+          password,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -191,6 +196,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.first_name ?? value;
@@ -223,6 +229,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.last_name ?? value;
@@ -255,6 +262,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -288,6 +296,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -324,6 +333,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.handicap ?? value;
@@ -356,6 +366,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.plays_mondays ?? value;
@@ -388,6 +399,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays: value,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.subs_mondays ?? value;
@@ -420,6 +432,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays: value,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.plays_wednesdays ?? value;
@@ -452,6 +465,7 @@ export default function PlayersUpdateForm(props) {
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays: value,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.subs_wednesdays ?? value;
@@ -466,6 +480,39 @@ export default function PlayersUpdateForm(props) {
         hasError={errors.subs_wednesdays?.hasError}
         {...getOverrideProps(overrides, "subs_wednesdays")}
       ></SwitchField>
+      <TextField
+        label="Password"
+        isRequired={true}
+        isReadOnly={false}
+        value={password}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              first_name,
+              last_name,
+              email,
+              phone,
+              handicap,
+              plays_mondays,
+              subs_mondays,
+              plays_wednesdays,
+              subs_wednesdays,
+              password: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.password ?? value;
+          }
+          if (errors.password?.hasError) {
+            runValidationTasks("password", value);
+          }
+          setPassword(value);
+        }}
+        onBlur={() => runValidationTasks("password", password)}
+        errorMessage={errors.password?.errorMessage}
+        hasError={errors.password?.hasError}
+        {...getOverrideProps(overrides, "password")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

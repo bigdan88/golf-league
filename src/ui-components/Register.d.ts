@@ -7,13 +7,12 @@
 import * as React from "react";
 import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { Players } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type PlayersUpdateFormInputValues = {
+export declare type RegisterInputValues = {
     first_name?: string;
     last_name?: string;
     email?: string;
@@ -25,7 +24,7 @@ export declare type PlayersUpdateFormInputValues = {
     subs_wednesdays?: boolean;
     password?: string;
 };
-export declare type PlayersUpdateFormValidationValues = {
+export declare type RegisterValidationValues = {
     first_name?: ValidationFunction<string>;
     last_name?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
@@ -38,8 +37,8 @@ export declare type PlayersUpdateFormValidationValues = {
     password?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type PlayersUpdateFormOverridesProps = {
-    PlayersUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type RegisterOverridesProps = {
+    RegisterGrid?: PrimitiveOverrideProps<GridProps>;
     first_name?: PrimitiveOverrideProps<TextFieldProps>;
     last_name?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
@@ -51,15 +50,14 @@ export declare type PlayersUpdateFormOverridesProps = {
     subs_wednesdays?: PrimitiveOverrideProps<SwitchFieldProps>;
     password?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type PlayersUpdateFormProps = React.PropsWithChildren<{
-    overrides?: PlayersUpdateFormOverridesProps | undefined | null;
+export declare type RegisterProps = React.PropsWithChildren<{
+    overrides?: RegisterOverridesProps | undefined | null;
 } & {
-    id?: string;
-    players?: Players;
-    onSubmit?: (fields: PlayersUpdateFormInputValues) => PlayersUpdateFormInputValues;
-    onSuccess?: (fields: PlayersUpdateFormInputValues) => void;
-    onError?: (fields: PlayersUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: PlayersUpdateFormInputValues) => PlayersUpdateFormInputValues;
-    onValidate?: PlayersUpdateFormValidationValues;
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: RegisterInputValues) => RegisterInputValues;
+    onSuccess?: (fields: RegisterInputValues) => void;
+    onError?: (fields: RegisterInputValues, errorMessage: string) => void;
+    onChange?: (fields: RegisterInputValues) => RegisterInputValues;
+    onValidate?: RegisterValidationValues;
 } & React.CSSProperties>;
-export default function PlayersUpdateForm(props: PlayersUpdateFormProps): React.ReactElement;
+export default function Register(props: RegisterProps): React.ReactElement;

@@ -16,6 +16,7 @@ export declare type PlayersCreateFormInputValues = {
     first_name?: string;
     last_name?: string;
     email?: string;
+    password?: string;
     phone?: string;
     handicap?: number;
     plays_mondays?: boolean;
@@ -27,6 +28,7 @@ export declare type PlayersCreateFormValidationValues = {
     first_name?: ValidationFunction<string>;
     last_name?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
+    password?: ValidationFunction<string>;
     phone?: ValidationFunction<string>;
     handicap?: ValidationFunction<number>;
     plays_mondays?: ValidationFunction<boolean>;
@@ -40,6 +42,7 @@ export declare type PlayersCreateFormOverridesProps = {
     first_name?: PrimitiveOverrideProps<TextFieldProps>;
     last_name?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
+    password?: PrimitiveOverrideProps<TextFieldProps>;
     phone?: PrimitiveOverrideProps<TextFieldProps>;
     handicap?: PrimitiveOverrideProps<TextFieldProps>;
     plays_mondays?: PrimitiveOverrideProps<SwitchFieldProps>;

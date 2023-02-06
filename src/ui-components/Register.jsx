@@ -17,7 +17,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Players } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function PlayersCreateForm(props) {
+export default function Register(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -32,18 +32,17 @@ export default function PlayersCreateForm(props) {
     first_name: "",
     last_name: "",
     email: "",
-    password: "",
     phone: "",
     handicap: "",
     plays_mondays: false,
     subs_mondays: false,
     plays_wednesdays: false,
     subs_wednesdays: false,
+    password: "",
   };
   const [first_name, setFirst_name] = React.useState(initialValues.first_name);
   const [last_name, setLast_name] = React.useState(initialValues.last_name);
   const [email, setEmail] = React.useState(initialValues.email);
-  const [password, setPassword] = React.useState(initialValues.password);
   const [phone, setPhone] = React.useState(initialValues.phone);
   const [handicap, setHandicap] = React.useState(initialValues.handicap);
   const [plays_mondays, setPlays_mondays] = React.useState(
@@ -58,31 +57,32 @@ export default function PlayersCreateForm(props) {
   const [subs_wednesdays, setSubs_wednesdays] = React.useState(
     initialValues.subs_wednesdays
   );
+  const [password, setPassword] = React.useState(initialValues.password);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setFirst_name(initialValues.first_name);
     setLast_name(initialValues.last_name);
     setEmail(initialValues.email);
-    setPassword(initialValues.password);
     setPhone(initialValues.phone);
     setHandicap(initialValues.handicap);
     setPlays_mondays(initialValues.plays_mondays);
     setSubs_mondays(initialValues.subs_mondays);
     setPlays_wednesdays(initialValues.plays_wednesdays);
     setSubs_wednesdays(initialValues.subs_wednesdays);
+    setPassword(initialValues.password);
     setErrors({});
   };
   const validations = {
     first_name: [{ type: "Required" }],
     last_name: [{ type: "Required" }],
     email: [{ type: "Required" }, { type: "Email" }],
-    password: [{ type: "Required" }],
     phone: [{ type: "Phone" }],
     handicap: [],
     plays_mondays: [],
     subs_mondays: [],
     plays_wednesdays: [],
     subs_wednesdays: [],
+    password: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -112,13 +112,13 @@ export default function PlayersCreateForm(props) {
           first_name,
           last_name,
           email,
-          password,
           phone,
           handicap,
           plays_mondays,
           subs_mondays,
           plays_wednesdays,
           subs_wednesdays,
+          password,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -161,7 +161,7 @@ export default function PlayersCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PlayersCreateForm")}
+      {...getOverrideProps(overrides, "Register")}
       {...rest}
     >
       <TextField
@@ -176,13 +176,13 @@ export default function PlayersCreateForm(props) {
               first_name: value,
               last_name,
               email,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.first_name ?? value;
@@ -209,13 +209,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name: value,
               email,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.last_name ?? value;
@@ -242,13 +242,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email: value,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -264,42 +264,7 @@ export default function PlayersCreateForm(props) {
         {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
-        label="Password"
-        descriptiveText=""
-        isRequired={true}
-        isReadOnly={false}
-        value={password}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              first_name,
-              last_name,
-              email,
-              password: value,
-              phone,
-              handicap,
-              plays_mondays,
-              subs_mondays,
-              plays_wednesdays,
-              subs_wednesdays,
-            };
-            const result = onChange(modelFields);
-            value = result?.password ?? value;
-          }
-          if (errors.password?.hasError) {
-            runValidationTasks("password", value);
-          }
-          setPassword(value);
-        }}
-        onBlur={() => runValidationTasks("password", password)}
-        errorMessage={errors.password?.errorMessage}
-        hasError={errors.password?.hasError}
-        {...getOverrideProps(overrides, "password")}
-      ></TextField>
-      <TextField
         label="Phone"
-        descriptiveText="Optional, but it will enable text updates"
         isRequired={false}
         isReadOnly={false}
         type="tel"
@@ -311,13 +276,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone: value,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -348,13 +313,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone,
               handicap: value,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.handicap ?? value;
@@ -381,13 +346,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone,
               handicap,
               plays_mondays: value,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.plays_mondays ?? value;
@@ -414,13 +379,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays: value,
               plays_wednesdays,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.subs_mondays ?? value;
@@ -447,13 +412,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays: value,
               subs_wednesdays,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.plays_wednesdays ?? value;
@@ -480,13 +445,13 @@ export default function PlayersCreateForm(props) {
               first_name,
               last_name,
               email,
-              password,
               phone,
               handicap,
               plays_mondays,
               subs_mondays,
               plays_wednesdays,
               subs_wednesdays: value,
+              password,
             };
             const result = onChange(modelFields);
             value = result?.subs_wednesdays ?? value;
@@ -501,6 +466,39 @@ export default function PlayersCreateForm(props) {
         hasError={errors.subs_wednesdays?.hasError}
         {...getOverrideProps(overrides, "subs_wednesdays")}
       ></SwitchField>
+      <TextField
+        label="Password"
+        isRequired={true}
+        isReadOnly={false}
+        value={password}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              first_name,
+              last_name,
+              email,
+              phone,
+              handicap,
+              plays_mondays,
+              subs_mondays,
+              plays_wednesdays,
+              subs_wednesdays,
+              password: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.password ?? value;
+          }
+          if (errors.password?.hasError) {
+            runValidationTasks("password", value);
+          }
+          setPassword(value);
+        }}
+        onBlur={() => runValidationTasks("password", password)}
+        errorMessage={errors.password?.errorMessage}
+        hasError={errors.password?.hasError}
+        {...getOverrideProps(overrides, "password")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
