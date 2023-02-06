@@ -1,0 +1,29 @@
+type GolfRound @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  players_game: Players @hasOne
+  date: AWSDateTime
+  hole1: Int
+  hole2: Int
+  hole3: Int
+  hole4: Int
+  hole5: Int
+  hole6: Int
+  hole7: Int
+  hole8: Int
+  hole9: Int
+}
+
+type Players @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  email: AWSEmail!
+  phone: AWSPhone
+  handicap: Float
+  plays_mondays: Boolean
+  subs_mondays: Boolean
+  plays_wednesdays: Boolean
+  subs_wednesdays: Boolean
+  password: String!
+}
+ 

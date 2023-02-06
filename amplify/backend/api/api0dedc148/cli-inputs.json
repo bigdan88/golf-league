@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "golfleague51e12041",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
